@@ -175,11 +175,29 @@ CSV files of various types.
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
-          <excludes>
-            <exclude>**/perf/PerformanceTest.java</exclude>
-          </excludes>
+          <skip>true</skip>
         </configuration>
       </plugin>
+	<plugin>
+		<artifactId>maven-failsafe-plugin</artifactId>
+		<version>2.11</version>
+		<configuration>
+			<includes>
+				<include>**/*Test.java</include>
+				<include>**/Test*.java</include>
+				<include>**/When*.java</include>
+				<include>**/*TestSuite.java</include>
+			</includes>
+		</configuration>
+		<executions>
+			<execution>
+				<goals>
+					<goal>integration-test</goal>
+					<goal>verify</goal>
+				</goals>
+			</execution>
+		</executions>
+	</plugin>
       <!-- Allow checkstyle to be run interactively; keep in sync with report config below -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
